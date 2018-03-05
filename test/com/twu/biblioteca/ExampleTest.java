@@ -3,10 +3,9 @@ package com.twu.biblioteca;
 
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import java.util.HashMap;
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class ExampleTest {
 
@@ -53,6 +52,25 @@ public class ExampleTest {
         third_bookInfos.add("2015");
 
         assertEquals(testBooks, bib.listBooks(testBooks));
+    }
+
+    @Test
+    public void test_showMenu(){
+        BibliotecaApp bib = new BibliotecaApp();
+        HashMap<Integer, ArrayList<String>> test_menu = new HashMap<Integer, ArrayList<String>>();
+        ArrayList<String> first_item = new ArrayList<String>();
+
+        first_item.add("List Books");
+        test_menu.put(1, first_item);
+
+        String expect = "1[List Books]";
+
+        assertEquals(expect, bib.showMenu(test_menu));
+    }
+
+    @Test
+    public void test_menuOptionValidation(){
+        BibliotecaApp bib = new BibliotecaApp();
     }
 
 }

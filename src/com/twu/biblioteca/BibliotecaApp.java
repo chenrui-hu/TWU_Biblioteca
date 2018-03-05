@@ -54,6 +54,20 @@ public class BibliotecaApp {
 //    }
 
 
+    public String showMenu(HashMap<Integer, ArrayList<String>> menu) {
+
+        System.out.println("------Main Menu------");
+        String output = "";
+
+        for(Object keySet: menu.keySet()){
+            System.out.print(keySet+"   ");
+            System.out.println(menu.get(keySet));
+            output += keySet.toString() + menu.get(keySet);
+        }
+        return output;
+    }
+
+
     public static void main(String[] args) {
 
         printWelcome(getCustomer_name());
