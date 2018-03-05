@@ -3,6 +3,9 @@ package com.twu.biblioteca;
 
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.util.HashMap;
 import java.util.ArrayList;
 
@@ -17,16 +20,25 @@ public class ExampleTest {
         assertEquals(welcome, bib.printWelcome("Bill"));
     }
 
+
     @Test
-    public void test_getBookList(){
+    public void test_createBookList(){
         BibliotecaApp bib = new BibliotecaApp();
         HashMap<Integer, ArrayList<String>> testBooks = new HashMap<Integer, ArrayList<String>>();
-        assertEquals(testBooks, bib.listBooks(testBooks));
+
+        ArrayList<String> first_bookInfos = new ArrayList<String>();
+        testBooks.put(1, first_bookInfos);
+
+        first_bookInfos.add("Head First Java: 2nd Edition");
+        first_bookInfos.add("Kathy Sierra; Bert Bates");
+        first_bookInfos.add("2009");
+
+        assertEquals(testBooks, bib.createBookList(testBooks, first_bookInfos));
+
     }
 
-
     @Test
-    public void test_bookList(){
+    public void test_listBooks(){
         BibliotecaApp bib = new BibliotecaApp();
         HashMap<Integer, ArrayList<String>> testBooks = new HashMap<Integer, ArrayList<String>>();
 
@@ -70,7 +82,20 @@ public class ExampleTest {
 
     @Test
     public void test_menuOptionValidation(){
+
         BibliotecaApp bib = new BibliotecaApp();
+        HashMap<Integer, ArrayList<String>> testBooks = new HashMap<Integer, ArrayList<String>>();
+
+        ArrayList<String> first_bookInfos = new ArrayList<String>();
+        testBooks.put(1, first_bookInfos);
+
+        first_bookInfos.add("Head First Java: 2nd Edition");
+        first_bookInfos.add("Kathy Sierra; Bert Bates");
+        first_bookInfos.add("2009");
+
+        int menu_options = 2;
+
+        assertEquals(false, bib.menuOptionValidation(testBooks, menu_options));
     }
 
 }

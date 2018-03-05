@@ -8,6 +8,9 @@ import java.util.Scanner;
 
 public class BibliotecaApp {
 
+    public static HashMap<Integer, ArrayList<String>> bookList = new HashMap<Integer, ArrayList<String>>();
+
+
     public static String getCustomer_name() {
 
         Scanner sc = new Scanner(System.in);
@@ -34,7 +37,7 @@ public class BibliotecaApp {
     }
 
 
-    public HashMap bookList(HashMap<Integer, ArrayList<String>> bookList, ArrayList<String> new_book){
+    public HashMap createBookList(HashMap<Integer, ArrayList<String>> bookList, ArrayList<String> new_book){
 
         Iterator iter = bookList.keySet().iterator();
         int key = 1;
@@ -44,6 +47,7 @@ public class BibliotecaApp {
         }
         bookList.put(key+1, new_book);
 
+        System.out.println(bookList); // for test only
         return bookList;
     }
 
@@ -67,9 +71,19 @@ public class BibliotecaApp {
         return output;
     }
 
+    public boolean menuOptionValidation(HashMap<Integer, ArrayList<String>> menu_options, int option) {
+        boolean validate = menu_options.containsKey(option);
+        if (! validate) {
+            System.out.println("Please select a valid option!");
+        }
+        return validate;
+    }
+
 
     public static void main(String[] args) {
 
         printWelcome(getCustomer_name());
     }
+
+
 }
