@@ -14,7 +14,7 @@ public class ExampleTest {
     public void test_printWelcome() {
 
         BibliotecaApp bib = new BibliotecaApp();
-        String welcome = "Hello Bill. Welcome to Chenrui's Biblioteca, we are ready to serve you now.";
+        String welcome = "Hello Bill. Welcome to Chenrui's Biblioteca. Please pick the book(s) that interest(s) you.";
         assertEquals(welcome, bib.printWelcome("Bill"));
     }
 
@@ -40,17 +40,17 @@ public class ExampleTest {
         ArrayList<String> third_bookInfos = new ArrayList<String>();
         testBooks.put(3, third_bookInfos);
 
-        first_bookInfos.add("Head First Java");
+        first_bookInfos.add("Head First Java: 2nd Edition");
         first_bookInfos.add("Kathy Sierra; Bert Bates");
-        first_bookInfos.add("O'Reilly Media");
+        first_bookInfos.add("2009");
 
         second_bookInfos.add("Test Driven Development");
         second_bookInfos.add("Viktor Farcic; Alex Garcia");
-        second_bookInfos.add("Packt Publishing");
+        second_bookInfos.add("2003");
 
-        third_bookInfos.add("Think Python");
+        third_bookInfos.add("Think Python: 2nd Edition");
         third_bookInfos.add("Allen B. Downey");
-        third_bookInfos.add("Green Tea Press");
+        third_bookInfos.add("2015");
 
         assertEquals(testBooks, bib.listBooks(testBooks));
     }

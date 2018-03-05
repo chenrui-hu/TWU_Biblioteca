@@ -17,13 +17,14 @@ public class BibliotecaApp {
 
     public static String printWelcome(String customer_name) {
 
-        String welcome = "Hello " + customer_name + ". Welcome to Chenrui's Biblioteca, we are ready to serve you now.";
+        String welcome = "Hello " + customer_name + ". Welcome to Chenrui's Biblioteca. Please pick the book(s) that interest(s) you.";
         System.out.println(welcome);
         return welcome;
     }
 
     public HashMap listBooks(HashMap bookList) {
 
+        System.out.println("------BOOKSHELF------");
         for(Object keySet: bookList.keySet()){
             System.out.print(keySet+"   ");
             System.out.println(bookList.get(keySet));
