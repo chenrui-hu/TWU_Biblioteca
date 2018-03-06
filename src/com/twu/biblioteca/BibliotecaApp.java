@@ -117,7 +117,13 @@ public class BibliotecaApp {
         return validate;
     }
 
-    public int quitOption(HashMap optionList, HashMap menu) {
+    public int makeOption() {
+        Scanner sc = new Scanner(System.in);
+        int option = sc.nextInt();
+        return option;
+    }
+
+    public int quitOption(HashMap optionList, HashMap menu, HashMap bookList) {
 
         if (optionList.get(1) == "Quit" ) {
             System.out.println("------Quitting the system------");
@@ -125,13 +131,24 @@ public class BibliotecaApp {
             return 1;
         }
         else if (optionList.get(1).getClass() == ArrayList.class) {
-            System.out.println("------Redirecting to Main Menu------");
-            showMenu(menu);
+            System.out.println("------Redirecting to last page------");
+            if (optionList.get(2) == "Check out" ){
+                checkOutBook(bookList, makeOption());
+            }
+            else
+                showMenu(menu);
             return 2;
         }
         else
             System.out.println("System warning: illegal input!");
             return 0;
+    }
+
+    public HashMap checkOutBook(HashMap bookList, int bookIndex) {
+
+        bookList.remove(bookIndex);
+        return listBooks(bookList);
+
     }
 
 
