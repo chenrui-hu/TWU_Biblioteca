@@ -77,10 +77,10 @@ public class ExampleTest {
         BibliotecaApp bib = new BibliotecaApp();
         HashMap<Integer, String> test_menu = new HashMap<Integer, String>();
 
-        test_menu.put(1, "List Books");
-        test_menu.put(2, "Quit");
+        test_menu.put(1, "Quit");
+        test_menu.put(2, "List Books");
 
-        String expect = "1List Books" + "2Quit";
+        String expect = "1Quit" + "2List Books";
 
         assertEquals(expect, bib.showMenu(test_menu));
     }
@@ -119,25 +119,23 @@ public class ExampleTest {
     public void test_quitOption() { // for bookshelf and menu
 
         BibliotecaApp bib = new BibliotecaApp();
-        // test menu
-        HashMap<Integer, String> test_menu = new HashMap<Integer, String>();
-
-        test_menu.put(1, "List Books");
-        test_menu.put(2, "Quit");
-
-        assertEquals(1, bib.quitOption(test_menu));
 
         //test bookshelf
         HashMap<Integer, ArrayList<String>> test_bookshelf = new HashMap<Integer, ArrayList<String>>();
 
+        ArrayList<String> quitOpt = new ArrayList<String>();
+        test_bookshelf .put(1, quitOpt);
+
         ArrayList<String> first_bookInfos = new ArrayList<String>();
-        test_bookshelf .put(1, first_bookInfos);
+        test_bookshelf .put(2, first_bookInfos);
 
         ArrayList<String> second_bookInfos = new ArrayList<String>();
-        test_bookshelf .put(2, second_bookInfos);
+        test_bookshelf .put(3, second_bookInfos);
 
         ArrayList<String> third_bookInfos = new ArrayList<String>();
-        test_bookshelf .put(3, third_bookInfos);
+        test_bookshelf .put(4, third_bookInfos);
+
+        quitOpt.add("Quit");
 
         first_bookInfos.add("Head First Java: 2nd Edition");
         first_bookInfos.add("Kathy Sierra; Bert Bates");
@@ -151,13 +149,14 @@ public class ExampleTest {
         third_bookInfos.add("Allen B. Downey");
         third_bookInfos.add("2015");
 
-        assertEquals(2, bib.quitOption(test_bookshelf));
+        // test menu
+        HashMap<Integer, String> test_menu = new HashMap<Integer, String>();
 
-    }
+        test_menu.put(1, "Quit");
+        test_menu.put(2, "List Books");
 
-
-    @Test
-    public void test_otherOption() { // for options other than quit
+        assertEquals(2, bib.quitOption(test_bookshelf, test_menu));
+        assertEquals(1, bib.quitOption(test_menu, test_menu));
 
     }
 

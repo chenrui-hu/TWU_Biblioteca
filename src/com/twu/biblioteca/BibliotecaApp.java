@@ -34,23 +34,33 @@ public class BibliotecaApp {
 
     }
 
-    public HashMap createBookList() {
+    //initial booklist with quit option
+    public HashMap initializeBookList() {
 
-        HashMap<Integer, ArrayList<String>> initialBookList = new HashMap<Integer, ArrayList<String>>();
-        ArrayList<String> firstBook = new ArrayList<String>();
+        HashMap<Integer, ArrayList<String>> initialList = new HashMap<Integer, ArrayList<String>>();
+        ArrayList<String> quitOpt = new ArrayList<String>();
+
+        quitOpt.add("Quit");
+        initialList.put(1, quitOpt);
+
+        return initialList;
+    }
+
+    //add a new book infos
+    public ArrayList<String> createBook() {
+
+        ArrayList<String> newBook = new ArrayList<String>();
 
         Scanner sc = new Scanner(System.in);
         String bookTitle = sc.nextLine();
-        firstBook.add(bookTitle);
+        newBook.add(bookTitle);
         String publishYear = sc.nextLine();
-        firstBook.add(publishYear);
+        newBook.add(publishYear);
 
-        initialBookList.put(1, firstBook);
 
-        return initialBookList;
+        return newBook;
 
     }
-
 
     public HashMap updateBookList(HashMap<Integer, ArrayList<String>> bookList, ArrayList<String> new_book) {
 
@@ -69,8 +79,8 @@ public class BibliotecaApp {
     public HashMap createMenu() {
         HashMap<Integer, String> menu = new HashMap<Integer, String>();
 
-        menu.put(1, "List Books");
-        menu.put(2, "Quit");
+        menu.put(1, "Quit");
+        menu.put(2, "List Books");
 
         return menu;
     }
@@ -94,6 +104,8 @@ public class BibliotecaApp {
         if (!validate) {
             System.out.println("Please select a valid book!");
         }
+//        else
+//            otherOptions(book_options);
         return validate;
     }
 
@@ -105,19 +117,25 @@ public class BibliotecaApp {
         return validate;
     }
 
-    public int quitOption(HashMap optionList) {
+    public int quitOption(HashMap optionList, HashMap menu) {
 
-        ArrayList rdm = new ArrayList();
-        if (optionList.get(1) == rdm.getClass()) {
-            
+        if (optionList.get(1) == "Quit" ) {
+            System.out.println("------Quitting the system------");
+            System.out.println("------See you next time------");
             return 1;
         }
-        else if (optionList.get(1).getClass() == rdm.getClass()) {
+        else if (optionList.get(1).getClass() == ArrayList.class) {
+            System.out.println("------Redirecting to Main Menu------");
+            showMenu(menu);
             return 2;
         }
         else
+            System.out.println("System warning: illegal input!");
             return 0;
     }
+
+
+    //get keyboard input: option
 
         public static void main (String[]args){
 
