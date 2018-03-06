@@ -1,9 +1,7 @@
 package com.twu.biblioteca;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.*;
 import java.util.Scanner;
 
 public class BibliotecaApp {
@@ -28,62 +26,102 @@ public class BibliotecaApp {
     public HashMap listBooks(HashMap bookList) {
 
         System.out.println("------BOOKSHELF------");
-        for(Object keySet: bookList.keySet()){
-            System.out.print(keySet+"   ");
+        for (Object keySet : bookList.keySet()) {
+            System.out.print(keySet + "   ");
             System.out.println(bookList.get(keySet));
         }
         return bookList;
 
     }
 
+    public HashMap createBookList() {
 
-    public HashMap createBookList(HashMap<Integer, ArrayList<String>> bookList, ArrayList<String> new_book){
+        HashMap<Integer, ArrayList<String>> initialBookList = new HashMap<Integer, ArrayList<String>>();
+        ArrayList<String> firstBook = new ArrayList<String>();
+
+        Scanner sc = new Scanner(System.in);
+        String bookTitle = sc.nextLine();
+        firstBook.add(bookTitle);
+        String publishYear = sc.nextLine();
+        firstBook.add(publishYear);
+
+        initialBookList.put(1, firstBook);
+
+        return initialBookList;
+
+    }
+
+
+    public HashMap updateBookList(HashMap<Integer, ArrayList<String>> bookList, ArrayList<String> new_book) {
 
         Iterator iter = bookList.keySet().iterator();
         int key = 1;
-        while(iter.hasNext()){
+        while (iter.hasNext()) {
             Object obj = iter.next();
             key = Integer.parseInt(obj.toString());
         }
-        bookList.put(key+1, new_book);
+        bookList.put(key + 1, new_book);
 
-        System.out.println(bookList); // for test only
+        // System.out.println(bookList); // for test only
         return bookList;
     }
 
-//    public createBook(){
-//        ArrayList<String> book = new ArrayList<String>();
-//        book.add()
-//        return book;
-//    }
+    public HashMap createMenu() {
+        HashMap<Integer, String> menu = new HashMap<Integer, String>();
 
+        menu.put(1, "List Books");
+        menu.put(2, "Quit");
 
-    public String showMenu(HashMap<Integer, ArrayList<String>> menu) {
+        return menu;
+    }
+
+    public String showMenu(HashMap<Integer, String> menu) {
 
         System.out.println("------Main Menu------");
+
         String output = "";
 
-        for(Object keySet: menu.keySet()){
-            System.out.print(keySet+"   ");
+        for (Object keySet : menu.keySet()) {
+            System.out.print(keySet + "   ");
             System.out.println(menu.get(keySet));
             output += keySet.toString() + menu.get(keySet);
         }
         return output;
     }
 
-    public boolean menuOptionValidation(HashMap<Integer, ArrayList<String>> menu_options, int option) {
+    public boolean bookOptionValidation(HashMap<Integer, ArrayList<String>> book_options, int option) {
+        boolean validate = book_options.containsKey(option);
+        if (!validate) {
+            System.out.println("Please select a valid book!");
+        }
+        return validate;
+    }
+
+    public boolean menuOptionValidation(HashMap<Integer, String> menu_options, int option) {
         boolean validate = menu_options.containsKey(option);
-        if (! validate) {
+        if (!validate) {
             System.out.println("Please select a valid option!");
         }
         return validate;
     }
 
+    public int quitOption(HashMap optionList) {
 
-    public static void main(String[] args) {
-
-        printWelcome(getCustomer_name());
+        ArrayList rdm = new ArrayList();
+        if (optionList.get(1) == rdm.getClass()) {
+            
+            return 1;
+        }
+        else if (optionList.get(1).getClass() == rdm.getClass()) {
+            return 2;
+        }
+        else
+            return 0;
     }
 
+        public static void main (String[]args){
+
+            printWelcome(getCustomer_name());
+        }
 
 }
