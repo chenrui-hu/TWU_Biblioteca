@@ -147,6 +147,7 @@ public class BibliotecaApp {
     public HashMap checkOutBook(HashMap bookList, int bookIndex) {
 
         bookList.remove(bookIndex);
+        System.out.println("Thank you! Enjoy the book.");
         return listBooks(bookList);
 
     }
