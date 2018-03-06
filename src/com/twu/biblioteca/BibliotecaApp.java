@@ -81,6 +81,7 @@ public class BibliotecaApp {
 
         menu.put(1, "Quit");
         menu.put(2, "List Books");
+        menu.put(3, "Return Book");
 
         return menu;
     }
@@ -104,8 +105,6 @@ public class BibliotecaApp {
         if (!validate) {
             System.out.println("That book is not available.");
         }
-//        else
-//            otherOptions(book_options);
         return validate;
     }
 
@@ -152,6 +151,7 @@ public class BibliotecaApp {
             return 0;
     }
 
+
     public HashMap checkOutBook(HashMap bookList, int bookIndex) {
 
         bookList.remove(bookIndex);
@@ -160,8 +160,19 @@ public class BibliotecaApp {
 
     }
 
+    // how to manage key with much more books
+    public HashMap returnBook(HashMap bookList, int bookIndex, ArrayList book) {
 
-    //get keyboard input: option
+        if (bookIndex == 2) {
+            bookList.put(2, book);
+            System.out.println("Thank you for returning the book.");
+            return listBooks(bookList);
+        }
+        else
+            System.out.println("That is not a valid book to return.");
+            return listBooks(bookList);
+    }
+
 
         public static void main (String[]args){
 

@@ -79,8 +79,9 @@ public class ExampleTest {
 
         test_menu.put(1, "Quit");
         test_menu.put(2, "List Books");
+        test_menu.put(3, "Return Book");
 
-        String expect = "1Quit" + "2List Books";
+        String expect = "1Quit" + "2List Books" + "3Return Book";
 
         assertEquals(expect, bib.showMenu(test_menu));
     }
@@ -189,6 +190,46 @@ public class ExampleTest {
         second_bookInfos.add("2003");
 
         assertEquals(new_bookList, bib.checkOutBook(test_bookList, 2));
+    }
+
+
+    @Test
+    public void test_returnBook() {
+
+        BibliotecaApp bib = new BibliotecaApp();
+        HashMap<Integer, ArrayList<String>> test_bookList = new HashMap<Integer, ArrayList<String>>();
+        HashMap<Integer, ArrayList<String>> new_bookList = new HashMap<Integer, ArrayList<String>>();
+        ArrayList<String> book = new ArrayList<String>();
+
+        book.add("Head First Java: 2nd Edition");
+        book.add("Kathy Sierra; Bert Bates");
+        book.add("2009");
+
+
+        ArrayList<String> quitOpt = new ArrayList<String>();
+        test_bookList .put(1, quitOpt);
+        new_bookList.put(1, quitOpt);
+
+        ArrayList<String> first_bookInfos = new ArrayList<String>();
+        new_bookList.put(2, first_bookInfos);
+
+        ArrayList<String> second_bookInfos = new ArrayList<String>();
+        test_bookList.put(3, second_bookInfos);
+        new_bookList.put(3, second_bookInfos);
+
+        quitOpt.add("Quit");
+
+        first_bookInfos.add("Head First Java: 2nd Edition");
+        first_bookInfos.add("Kathy Sierra; Bert Bates");
+        first_bookInfos.add("2009");
+
+        second_bookInfos.add("Test Driven Development");
+        second_bookInfos.add("Viktor Farcic; Alex Garcia");
+        second_bookInfos.add("2003");
+
+        assertEquals(test_bookList, bib.returnBook(test_bookList, 4, book));
+        assertEquals(new_bookList, bib.returnBook(test_bookList,2, book));
+
     }
 
 
