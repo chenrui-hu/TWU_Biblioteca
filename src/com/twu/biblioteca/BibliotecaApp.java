@@ -102,7 +102,7 @@ public class BibliotecaApp {
     public boolean bookOptionValidation(HashMap<Integer, ArrayList<String>> book_options, int option) {
         boolean validate = book_options.containsKey(option);
         if (!validate) {
-            System.out.println("Please select a valid book!");
+            System.out.println("That book is not available.");
         }
 //        else
 //            otherOptions(book_options);
@@ -118,9 +118,17 @@ public class BibliotecaApp {
     }
 
     public int makeOption() {
-        Scanner sc = new Scanner(System.in);
-        int option = sc.nextInt();
-        return option;
+        System.out.println("Please make a move with number: ");
+        try {
+            Scanner sc = new Scanner(System.in);
+            int option = sc.nextInt();
+            return option;
+        }catch (Exception e) {
+            System.out.println("Illegal input, please input a number.");
+            makeOption();
+            return 0;
+        }
+
     }
 
     public int quitOption(HashMap optionList, HashMap menu, HashMap bookList) {
