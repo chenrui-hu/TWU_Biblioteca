@@ -9,9 +9,11 @@ import com.twu.biblioteca.BuildBiblioteca;
 
 public class BibliotecaApp {
 
-    HashMap<Integer, ArrayList<String>> bookList = BuildBiblioteca.build();
+    HashMap<Integer, ArrayList<String>> bookList = BuildBiblioteca.buildBookshelf();
+    HashMap<Integer, ArrayList<String>> movieList = BuildBiblioteca.buildMovieshelf();
     HashMap<Integer, String> mainMenu = BuildBiblioteca.createMenu();
-    HashMap<Integer, ArrayList<String>> checkedBooks = new HashMap<Integer, ArrayList<String>>();
+    HashMap<Integer, ArrayList<String>> itemLib = BuildBiblioteca.buildItemLib();
+    HashMap<Integer, ArrayList<String>> checkedItems = BuildBiblioteca.initializeList();
 
 
     public String getCustomer_name() {
@@ -38,6 +40,33 @@ public class BibliotecaApp {
         }
         return bookList;
 
+    }
+
+    public  HashMap listMovies() {
+        System.out.println("------Movieshelf------");
+        for (Object keySet : movieList.keySet()) {
+            System.out.print(keySet + "   ");
+            System.out.println(movieList.get(keySet));
+        }
+        return movieList;
+    }
+
+    public HashMap listBorrowed() {
+        System.out.println("------Borrowed Items------");
+        for (Object keySet : checkedItems.keySet()) {
+            System.out.print(keySet + "   ");
+            System.out.println(checkedItems.get(keySet));
+        }
+        return checkedItems;
+    }
+
+    public HashMap listLib() {
+        System.out.println("------Library------");
+        for (Object keySet : itemLib.keySet()) {
+            System.out.print(keySet + "   ");
+            System.out.println(itemLib.get(keySet));
+        }
+        return itemLib;
     }
 
 
@@ -93,33 +122,33 @@ public class BibliotecaApp {
     }
 
 
-    public HashMap checkOutBook(int bookIndex) {
+    public HashMap checkOutItem(int itemIndex) {
 
-        if(bookList.get(bookIndex) != null) {
-            checkedBooks.put(bookIndex, bookList.get(bookIndex));
-            bookList.replace(bookIndex, null);
+        if(itemLib.get(itemIndex) != null) {
+            checkedItems.put(itemIndex, itemLib.get(itemIndex));
+            itemLib.replace(itemIndex, null);
             System.out.println("Thank you! Enjoy the book.");
         }
         else{
             System.out.println("That book has been borrowed.");
         }
-        return bookList;
+        return itemLib;
 
     }
 
-    // bookIndex is reachable in bookList and checkedBooks
-    public HashMap returnBook(int bookIndex) {
+    // bookIndex is reachable in bookList and checkedItems
+    public HashMap returnItem(int itemIndex) {
 
-        if (bookList.containsKey(bookIndex) & bookList.get(bookIndex) == null) {
-            if (bookList.replace(bookIndex, null, checkedBooks.get(bookIndex))) {
-                checkedBooks.remove(bookIndex);
+        if (itemLib.containsKey(itemIndex) & itemLib.get(itemIndex) == null) {
+            if (itemLib.replace(itemIndex, null, checkedItems.get(itemIndex))) {
+                checkedItems.remove(itemIndex);
                 System.out.println("Thank you for returning the book.");
             } else
                 System.out.println("That is not a valid book to return.");
         } else
             System.out.println("That is not a valid book to return.");
 
-        return bookList;
+        return itemLib;
 
     }
 
@@ -132,7 +161,7 @@ public class BibliotecaApp {
                 return 0;
             }
             else if(currentPage.containsKey(option)) {
-                return 2;
+                return option;
             }
             else{
                 System.out.println("Illegal input, please input a valid number.");
@@ -140,7 +169,7 @@ public class BibliotecaApp {
             }
         }
         else if (currentList.get(1).getClass() == ArrayList.class) {
-            HashMap currentPage = bookList;
+            HashMap currentPage = itemLib;
             if (option == 0) {
                 return 0;
             }
@@ -148,22 +177,22 @@ public class BibliotecaApp {
                 return 1; // back to menu
             }
             else if (currentPage.containsKey(option) & currentPage.get(option)!=null) {
-                checkOutBook(option);
-                return 2; //list books
+                checkOutItem(option);
+                return 4; //list books
             }
-            else if (currentPage.containsKey(option) & checkedBooks.containsKey(option)){
-                returnBook(option);
-                return 2;
+            else if (currentPage.containsKey(option) & checkedItems.containsKey(option)){
+                returnItem(option);
+                return 4;
             }
             else {
                 System.out.println("Illegal input, please input a valid number.");
-                return 2;
+                return 4;
             }
 
         }
         else {
             System.out.println("Illegal input, please input a valid number.");
-            return 2;
+            return 4;
         }
     }
 
@@ -186,9 +215,23 @@ public class BibliotecaApp {
                     currentPage = mainMenu;
                     continue;
                 }
-                else if (opt == 2) {
+                else if(opt == 2){
                     listBooks();
                     currentPage = bookList;
+                    continue;
+                }
+                else if(opt == 3){
+                    listMovies();
+                    currentPage = movieList;
+                    continue;
+                }else if (opt == 4) {
+                    listLib();
+                    currentPage = itemLib;
+                    continue;
+                }
+                else if(opt == 5){
+                    listBorrowed();
+                    currentPage = itemLib;
                     continue;
                 }
             }

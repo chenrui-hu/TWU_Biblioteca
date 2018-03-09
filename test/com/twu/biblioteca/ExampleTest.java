@@ -121,7 +121,7 @@ public class ExampleTest {
         BuildBiblioteca bib = new BuildBiblioteca();
         BibliotecaApp app = new BibliotecaApp();
 
-        HashMap test_bookshelf =  bib.build();
+        HashMap test_bookshelf =  bib.buildBookshelf();
         HashMap test_menu = bib.createMenu();
 
         assertEquals(2, app.quitOption(test_bookshelf));
@@ -130,27 +130,27 @@ public class ExampleTest {
     }
 
     @Test
-    public void test_checkOutBook() {
+    public void test_checkOutItem() {
 
         BibliotecaApp app = new BibliotecaApp();
         BuildBiblioteca bib = new BuildBiblioteca();
-        HashMap<Integer, ArrayList<String>> test_bookList = bib.build();
+        HashMap<Integer, ArrayList<String>> test_bookList = bib.buildBookshelf();
         HashMap<Integer, ArrayList<String>> required_bookList = new HashMap<Integer, ArrayList<String>>();
 
         ArrayList<String> quitOpt = new ArrayList<String>();
         required_bookList.put(1, quitOpt);
 
         ArrayList<String> first_bookInfos = new ArrayList<String>();
-        test_bookList .put(2, first_bookInfos);
-        required_bookList.put(2, null);
+        test_bookList .put(12, first_bookInfos);
+        required_bookList.put(12, null);
 
         ArrayList<String> second_bookInfos = new ArrayList<String>();
-        test_bookList.put(3, second_bookInfos);
-        required_bookList.put(3, second_bookInfos);
+        test_bookList.put(13, second_bookInfos);
+        required_bookList.put(13, second_bookInfos);
 
         ArrayList<String> third_bookInfos = new ArrayList<String>();
-        test_bookList.put(4, third_bookInfos);
-        required_bookList.put(4, third_bookInfos);
+        test_bookList.put(14, third_bookInfos);
+        required_bookList.put(14, third_bookInfos);
 
         quitOpt.add("Quit");
 
@@ -166,12 +166,12 @@ public class ExampleTest {
         third_bookInfos.add("Allen B. Downey");
         third_bookInfos.add("2015");
 
-        assertEquals(required_bookList, app.checkOutBook(2));
+        assertEquals(required_bookList, app.checkOutItem(2));
     }
 
 
     @Test
-    public void test_returnBook() {
+    public void test_returnItem() {
 
         BibliotecaApp app = new BibliotecaApp();
 
@@ -182,23 +182,23 @@ public class ExampleTest {
         book.add("Kathy Sierra; Bert Bates");
         book.add("2009");
 
-        app.checkedBooks.put(2, book);
+        app.checkedItems.put(2, book);
 
         ArrayList<String> quitOpt = new ArrayList<String>();
         app.bookList.put(1, quitOpt);
         new_bookList.put(1, quitOpt);
 
         ArrayList<String> first_bookInfos = new ArrayList<String>();
-        app.bookList.put(2, null);
-        new_bookList.put(2, first_bookInfos);
+        app.bookList.put(12, null);
+        new_bookList.put(12, first_bookInfos);
 
         ArrayList<String> second_bookInfos = new ArrayList<String>();
-        app.bookList.put(3, second_bookInfos);
-        new_bookList.put(3, second_bookInfos);
+        app.bookList.put(13, second_bookInfos);
+        new_bookList.put(13, second_bookInfos);
 
         ArrayList<String> third_bookInfos = new ArrayList<String>();
-        app.bookList.put(4, third_bookInfos);
-        new_bookList.put(4, third_bookInfos);
+        app.bookList.put(14, third_bookInfos);
+        new_bookList.put(14, third_bookInfos);
 
         quitOpt.add("Quit");
 
@@ -214,8 +214,8 @@ public class ExampleTest {
         third_bookInfos.add("Allen B. Downey");
         third_bookInfos.add("2015");
 
-        assertEquals(new_bookList, app.returnBook(2));
-        assertEquals(app.bookList, app.returnBook(3));
+        assertEquals(new_bookList, app.returnItem(12));
+        assertEquals(app.bookList, app.returnItem(13));
 
     }
 

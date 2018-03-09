@@ -5,7 +5,7 @@ import java.util.*;
 public class BuildBiblioteca {
 
     //initial booklist with quit option
-    public static HashMap<Integer,ArrayList<String>>  initializeBookList() {
+    public static HashMap<Integer,ArrayList<String>>  initializeList() {
 
         HashMap<Integer, ArrayList<String>> initialList = new HashMap<Integer, ArrayList<String>>();
         ArrayList<String> quitOpt = new ArrayList<String>();
@@ -16,23 +16,22 @@ public class BuildBiblioteca {
         return initialList;
     }
 
-    //add a new book infos
-    public static ArrayList<String> createBook() {
+    public static ArrayList<String> createItem() {
 
-        ArrayList newBook = new ArrayList();
+        ArrayList<String> new_item = new ArrayList<String>();
 
+        System.out.println("Book example: Test Driven Development/Viktor Farcic; Alex Garcia/2009");
+        System.out.println("Movie example: Big Fish/2003/Tim Burton/8.0");
+        System.out.println("Please add item information, separate with /: ");
         Scanner sc = new Scanner(System.in);
-        String bookTitle = sc.nextLine();
-        newBook.add(bookTitle);
-        String author = sc.nextLine();
-        newBook.add(author);
-        String publishYear = sc.nextLine();
-        newBook.add(publishYear);
-
-        return newBook;
-
+        String input = sc.nextLine();
+        for (String retval : input.split("/")) {
+            new_item.add(retval);
+        }
+        return new_item;
     }
 
+    //ready for updating
     public static HashMap<Integer,ArrayList<String>>  updateBookList(HashMap<Integer, ArrayList<String>> bookList, ArrayList<String> new_book) {
 
         Iterator iter = bookList.keySet().iterator();
@@ -52,8 +51,9 @@ public class BuildBiblioteca {
 
         menu.put(1, "Quit");
         menu.put(2, "List Books");
-        menu.put(3, "Checkout Book");
-        menu.put(4, "Return Book");
+        menu.put(3, "List Movies");
+        menu.put(4, "Checkout Book");
+        menu.put(5, "Return Book");
 
         return menu;
     }
@@ -68,24 +68,19 @@ public class BuildBiblioteca {
 //    }
 
 
-    public static HashMap<Integer,ArrayList<String>>  build() {
+    public static HashMap<Integer,ArrayList<String>>  buildBookshelf() {
 
-        HashMap<Integer,ArrayList<String>> bookshelf = initializeBookList();
+        HashMap<Integer,ArrayList<String>> bookshelf = initializeList();
 
         //bookshelf
-        ArrayList<String> quitOpt = new ArrayList<String>();
-        bookshelf .put(1, quitOpt);
-
         ArrayList<String> first_bookInfos = new ArrayList<String>();
-        bookshelf .put(2, first_bookInfos);
+        bookshelf .put(12, first_bookInfos);
 
         ArrayList<String> second_bookInfos = new ArrayList<String>();
-        bookshelf .put(3, second_bookInfos);
+        bookshelf .put(13, second_bookInfos);
 
         ArrayList<String> third_bookInfos = new ArrayList<String>();
-        bookshelf .put(4, third_bookInfos);
-
-        quitOpt.add("Quit");
+        bookshelf .put(14, third_bookInfos);
 
         first_bookInfos.add("Head First Java: 2nd Edition");
         first_bookInfos.add("Kathy Sierra; Bert Bates");
@@ -101,6 +96,46 @@ public class BuildBiblioteca {
 
         return bookshelf;
 
+    }
+
+    public static HashMap<Integer, ArrayList<String>> buildMovieshelf() {
+
+        HashMap<Integer, ArrayList<String>> movie_shelf = initializeList();
+
+        //movieshelf
+        ArrayList<String> first_movieInfos = new ArrayList<String>();
+        movie_shelf.put(22, first_movieInfos);
+
+        ArrayList<String> second_movieInfos = new ArrayList<String>();
+        movie_shelf.put(23, second_movieInfos);
+
+        ArrayList<String> third_movieInfos = new ArrayList<String>();
+        movie_shelf.put(24, third_movieInfos);
+
+        first_movieInfos.add("Big Fish");
+        first_movieInfos.add("2003");
+        first_movieInfos.add("Tim Burton");
+        first_movieInfos.add("8.0");
+
+        second_movieInfos.add("The Shawshank Redemption");
+        second_movieInfos.add("1994");
+        second_movieInfos.add("Frank Darabont");
+        second_movieInfos.add("9.3");
+
+        third_movieInfos.add("The Godfather");
+        third_movieInfos.add("1972");
+        third_movieInfos.add("Francis Ford Coppola");
+        third_movieInfos.add("9.2");
+
+        return movie_shelf;
+
+    }
+
+    public static HashMap<Integer, ArrayList<String>> buildItemLib(){
+        HashMap itemLib = new HashMap();
+        itemLib.putAll(buildBookshelf());
+        itemLib.putAll(buildMovieshelf());
+        return itemLib ;
     }
 }
 
