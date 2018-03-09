@@ -16,7 +16,7 @@ public class ExampleTest {
     public void test_printWelcome() {
 
         BibliotecaApp bib = new BibliotecaApp();
-        String welcome = "Hello Bill. Welcome to Chenrui's Biblioteca. Please pick the book(s) that interest(s) you.";
+        String welcome = "Hello Bill. Welcome to Chenrui's Biblioteca. Type 0 to exit.";
         assertEquals(welcome, bib.printWelcome("Bill"));
     }
 
@@ -84,7 +84,8 @@ public class ExampleTest {
 
         test_menu.put(1, "Quit");
         test_menu.put(2, "List Books");
-        test_menu.put(3, "Return Book");
+        test_menu.put(3, "Checkout Book");
+        test_menu.put(4, "Return Book");
 
         assertEquals(test_menu, bib.createMenu());
     }

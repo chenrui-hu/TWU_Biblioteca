@@ -52,19 +52,20 @@ public class BuildBiblioteca {
 
         menu.put(1, "Quit");
         menu.put(2, "List Books");
-        menu.put(3, "Return Book");
+        menu.put(3, "Checkout Book");
+        menu.put(4, "Return Book");
 
         return menu;
     }
 
-    public static HashMap<Integer, String> createBookPage() {
-        HashMap<Integer, String> bookPage = new HashMap<Integer, String>();
-
-        bookPage.put(1, "Quit");
-        bookPage.put(2, "Checkout");
-
-        return bookPage;
-    }
+//    public static HashMap<Integer, String> createBookPage() {
+//        HashMap<Integer, String> bookPage = new HashMap<Integer, String>();
+//
+//        bookPage.put(1, "Quit");
+//        bookPage.put(2, "Checkout");
+//
+//        return bookPage;
+//    }
 
 
     public static HashMap<Integer,ArrayList<String>>  build() {
