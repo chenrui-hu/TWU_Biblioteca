@@ -15,6 +15,7 @@ public class BibliotecaApp {
     HashMap<Integer, String> helloPage = BuildBiblioteca.UniversalMenu();
     HashMap<Integer, ArrayList<String>> itemLib = BuildBiblioteca.buildItemLib();
     HashMap<Integer, ArrayList<String>> checkedItems = BuildBiblioteca.initializeList();
+    ArrayList<String> User = new ArrayList<String>();
 
 
 
@@ -45,6 +46,7 @@ public class BibliotecaApp {
     }
 
     public  HashMap listMovies() {
+
         System.out.println("------Movieshelf------");
         for (Object keySet : movieList.keySet()) {
             System.out.print(keySet + "   ");
@@ -200,7 +202,7 @@ public class BibliotecaApp {
     }
 
 
-    public static boolean checkStatus() {
+    public boolean checkStatus() {
 
         System.out.println("Please login your account, id/password: ");
         Scanner sc = new Scanner(System.in);
@@ -214,6 +216,7 @@ public class BibliotecaApp {
             while ((strLine = br.readLine()) != null) {
                 String[] user = strLine.split("/");
                 if (Arrays.equals(loginInfos,user)) {
+                    User.add(user[0]);
                     result = true;
 
                 }
@@ -225,6 +228,46 @@ public class BibliotecaApp {
         } finally {
             return result;
         }
+    }
+
+    public ArrayList getUserInfos(String id) {
+
+        ArrayList<String> details = new ArrayList<>();
+        try {
+            FileInputStream fstream = new FileInputStream("./DataBase/UserData.txt");
+            DataInputStream in = new DataInputStream(fstream);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            String strLine;
+            while ((strLine = br.readLine()) != null) {
+                String[] infos = strLine.split("/");
+                if(User.get(0).equals(infos[0])){
+                    User.add(infos[2]);
+                    User.add(infos[3]);
+                    User.add(infos[4]);
+                    return User;
+                }
+                else{
+                    System.out.println("NO ACCESS!");
+                }
+            }
+        } catch (Exception e) {//Catch exception if any
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            return User;
+        }
+    }
+
+    public boolean showAccount() {
+
+        getUserInfos(User.get(0));
+        System.out.println("------Account------");
+        System.out.println("Name: " + User.get(1));
+        System.out.println("ID: " + User.get(0));
+        System.out.println("Email: " + User.get(2));
+        System.out.println("Phone: " + User.get(3));
+        System.out.println("Please type 1 to go back.");
+
+        return true;
     }
 
     //continuous getting keyboard inputs. bookshelf->book->checkout bug.
@@ -288,6 +331,9 @@ public class BibliotecaApp {
                     listBorrowed();
                     currentPage = itemLib;
                     continue;
+                }else if (opt == 6) {
+                    showAccount();
+                    currentPage = itemLib;
                 }
             }
             if (input == 0) {
@@ -303,7 +349,8 @@ public class BibliotecaApp {
         BibliotecaApp app = new BibliotecaApp();
         String customer = app.getCustomer_name();
         app.printWelcome(customer);
-        //app.showMenu();
         app.continousInput();
     }
+
+
 }

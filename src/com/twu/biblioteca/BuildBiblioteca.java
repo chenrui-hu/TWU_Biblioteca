@@ -70,6 +70,14 @@ public class BuildBiblioteca {
         return u_menu;
     }
 
+    public static HashMap<Integer, String> accountPage(){
+
+        HashMap<Integer, String> accountPage = new HashMap<>();
+        accountPage.put(1, "Quit");
+
+        return accountPage;
+    }
+
 //    public static HashMap<Integer, String> createBookPage() {
 //        HashMap<Integer, String> bookPage = new HashMap<Integer, String>();
 //

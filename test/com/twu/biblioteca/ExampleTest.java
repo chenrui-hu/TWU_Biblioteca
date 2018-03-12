@@ -282,5 +282,14 @@ public class ExampleTest {
         //assertEquals(true, app.checkStatus(customer));
     }
 
+    @Test
+    public void test_account(){
+
+        BibliotecaApp app = new BibliotecaApp();
+        String[] librarian = new String[]{"John Smith", "John@gmail.com", "123456"};
+
+        assertEquals(librarian, app.showAccount());
+    }
+
 
 }
