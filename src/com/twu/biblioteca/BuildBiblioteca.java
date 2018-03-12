@@ -78,14 +78,15 @@ public class BuildBiblioteca {
         return accountPage;
     }
 
-//    public static HashMap<Integer, String> createBookPage() {
-//        HashMap<Integer, String> bookPage = new HashMap<Integer, String>();
-//
-//        bookPage.put(1, "Quit");
-//        bookPage.put(2, "Checkout");
-//
-//        return bookPage;
-//    }
+    public static HashMap<Integer, String> adminPage() {
+
+        HashMap<Integer, String> adminPage = new HashMap<Integer, String>();
+
+        adminPage.put(1, "Quit");
+        adminPage.put(2, "Manage");
+
+        return adminPage;
+    }
 
 
     public static HashMap<Integer,ArrayList<String>>  buildBookshelf() {

@@ -286,9 +286,12 @@ public class ExampleTest {
     public void test_account(){
 
         BibliotecaApp app = new BibliotecaApp();
-        String[] librarian = new String[]{"John Smith", "John@gmail.com", "123456"};
+        app.User.add("000-0000");
+        app.User.add("John Smith");
+        app.User.add("John@gmail.com");
+        app.User.add("123456");
 
-        assertEquals(librarian, app.showAccount());
+        assertEquals(true, app.showAccount());
     }
 
 

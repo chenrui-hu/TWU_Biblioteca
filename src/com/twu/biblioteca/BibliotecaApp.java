@@ -16,6 +16,7 @@ public class BibliotecaApp {
     HashMap<Integer, ArrayList<String>> itemLib = BuildBiblioteca.buildItemLib();
     HashMap<Integer, ArrayList<String>> checkedItems = BuildBiblioteca.initializeList();
     ArrayList<String> User = new ArrayList<String>();
+    private String[] Admin = {"000-0000"};
 
 
 
@@ -232,7 +233,6 @@ public class BibliotecaApp {
 
     public ArrayList getUserInfos(String id) {
 
-        ArrayList<String> details = new ArrayList<>();
         try {
             FileInputStream fstream = new FileInputStream("./DataBase/UserData.txt");
             DataInputStream in = new DataInputStream(fstream);
@@ -241,9 +241,9 @@ public class BibliotecaApp {
             while ((strLine = br.readLine()) != null) {
                 String[] infos = strLine.split("/");
                 if(User.get(0).equals(infos[0])){
+                    User.add(infos[1]);
                     User.add(infos[2]);
                     User.add(infos[3]);
-                    User.add(infos[4]);
                     return User;
                 }
                 else{
