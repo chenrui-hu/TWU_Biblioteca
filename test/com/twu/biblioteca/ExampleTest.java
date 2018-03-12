@@ -52,13 +52,13 @@ public class ExampleTest {
         testBooks.put(1, quitOpt);
 
         ArrayList<String> first_bookInfos = new ArrayList<String>();
-        testBooks.put(2, first_bookInfos);
+        testBooks.put(12, first_bookInfos);
 
         ArrayList<String> second_bookInfos = new ArrayList<String>();
-        testBooks.put(3, second_bookInfos);
+        testBooks.put(13, second_bookInfos);
 
         ArrayList<String> third_bookInfos = new ArrayList<String>();
-        testBooks.put(4, third_bookInfos);
+        testBooks.put(14, third_bookInfos);
 
         quitOpt.add("Quit");
 
@@ -84,8 +84,10 @@ public class ExampleTest {
 
         test_menu.put(1, "Quit");
         test_menu.put(2, "List Books");
-        test_menu.put(3, "Checkout Book");
-        test_menu.put(4, "Return Book");
+        test_menu.put(3, "List Movies");
+        test_menu.put(4, "Checkout Book");
+        test_menu.put(5, "Return Book");
+        test_menu.put(6, "Account");
 
         assertEquals(test_menu, bib.createMenu());
     }
@@ -134,8 +136,10 @@ public class ExampleTest {
 
         BibliotecaApp app = new BibliotecaApp();
         BuildBiblioteca bib = new BuildBiblioteca();
+
         HashMap<Integer, ArrayList<String>> test_bookList = bib.buildBookshelf();
         HashMap<Integer, ArrayList<String>> required_bookList = new HashMap<Integer, ArrayList<String>>();
+        HashMap<Integer, ArrayList<String>> test_movieList = new HashMap<Integer, ArrayList<String>>();
 
         ArrayList<String> quitOpt = new ArrayList<String>();
         required_bookList.put(1, quitOpt);
@@ -152,7 +156,34 @@ public class ExampleTest {
         test_bookList.put(14, third_bookInfos);
         required_bookList.put(14, third_bookInfos);
 
+        ArrayList<String> first_movieInfos = new ArrayList<String>();
+        test_movieList .put(22, first_movieInfos);
+        required_bookList.put(22, first_movieInfos);
+
+        ArrayList<String> second_movieInfos = new ArrayList<String>();
+        test_movieList .put(23, second_movieInfos);
+        required_bookList.put(23, second_movieInfos);
+
+        ArrayList<String> third_movieInfos = new ArrayList<String>();
+        test_movieList .put(24, third_movieInfos);
+        required_bookList.put(24, third_movieInfos);
+
         quitOpt.add("Quit");
+
+        first_movieInfos.add("Big Fish");
+        first_movieInfos.add("2003");
+        first_movieInfos.add("Tim Burton");
+        first_movieInfos.add("8.0");
+
+        second_movieInfos.add("The Shawshank Redemption");
+        second_movieInfos.add("1994");
+        second_movieInfos.add("Frank Darabont");
+        second_movieInfos.add("9.3");
+
+        third_movieInfos.add("The Godfather");
+        third_movieInfos.add("1972");
+        third_movieInfos.add("Francis Ford Coppola");
+        third_movieInfos.add("9.2");
 
         first_bookInfos.add("Head First Java: 2nd Edition");
         first_bookInfos.add("Kathy Sierra; Bert Bates");
@@ -166,7 +197,7 @@ public class ExampleTest {
         third_bookInfos.add("Allen B. Downey");
         third_bookInfos.add("2015");
 
-        assertEquals(required_bookList, app.checkOutItem(2));
+        assertEquals(required_bookList, app.checkOutItem(12));
     }
 
 
@@ -174,33 +205,55 @@ public class ExampleTest {
     public void test_returnItem() {
 
         BibliotecaApp app = new BibliotecaApp();
+        BuildBiblioteca bib = new BuildBiblioteca();
 
-        HashMap<Integer, ArrayList<String>> new_bookList = new HashMap<Integer, ArrayList<String>>();
-        ArrayList<String> book = new ArrayList<String>();
-
-        book.add("Head First Java: 2nd Edition");
-        book.add("Kathy Sierra; Bert Bates");
-        book.add("2009");
-
-        app.checkedItems.put(2, book);
+        HashMap<Integer, ArrayList<String>> test_bookList = bib.buildBookshelf();
+        HashMap<Integer, ArrayList<String>> required_bookList = new HashMap<Integer, ArrayList<String>>();
+        HashMap<Integer, ArrayList<String>> test_movieList = new HashMap<Integer, ArrayList<String>>();
 
         ArrayList<String> quitOpt = new ArrayList<String>();
-        app.bookList.put(1, quitOpt);
-        new_bookList.put(1, quitOpt);
+        required_bookList.put(1, quitOpt);
 
         ArrayList<String> first_bookInfos = new ArrayList<String>();
-        app.bookList.put(12, null);
-        new_bookList.put(12, first_bookInfos);
+        test_bookList .put(12, null);
+        required_bookList.put(12, first_bookInfos);
 
         ArrayList<String> second_bookInfos = new ArrayList<String>();
-        app.bookList.put(13, second_bookInfos);
-        new_bookList.put(13, second_bookInfos);
+        test_bookList.put(13, second_bookInfos);
+        required_bookList.put(13, second_bookInfos);
 
         ArrayList<String> third_bookInfos = new ArrayList<String>();
-        app.bookList.put(14, third_bookInfos);
-        new_bookList.put(14, third_bookInfos);
+        test_bookList.put(14, third_bookInfos);
+        required_bookList.put(14, third_bookInfos);
+
+        ArrayList<String> first_movieInfos = new ArrayList<String>();
+        test_movieList .put(22, first_movieInfos);
+        required_bookList.put(22, first_movieInfos);
+
+        ArrayList<String> second_movieInfos = new ArrayList<String>();
+        test_movieList .put(23, second_movieInfos);
+        required_bookList.put(23, second_movieInfos);
+
+        ArrayList<String> third_movieInfos = new ArrayList<String>();
+        test_movieList .put(24, third_movieInfos);
+        required_bookList.put(24, third_movieInfos);
 
         quitOpt.add("Quit");
+
+        first_movieInfos.add("Big Fish");
+        first_movieInfos.add("2003");
+        first_movieInfos.add("Tim Burton");
+        first_movieInfos.add("8.0");
+
+        second_movieInfos.add("The Shawshank Redemption");
+        second_movieInfos.add("1994");
+        second_movieInfos.add("Frank Darabont");
+        second_movieInfos.add("9.3");
+
+        third_movieInfos.add("The Godfather");
+        third_movieInfos.add("1972");
+        third_movieInfos.add("Francis Ford Coppola");
+        third_movieInfos.add("9.2");
 
         first_bookInfos.add("Head First Java: 2nd Edition");
         first_bookInfos.add("Kathy Sierra; Bert Bates");
@@ -214,9 +267,19 @@ public class ExampleTest {
         third_bookInfos.add("Allen B. Downey");
         third_bookInfos.add("2015");
 
-        assertEquals(new_bookList, app.returnItem(12));
-        assertEquals(app.bookList, app.returnItem(13));
+        assertEquals(required_bookList , app.returnItem(12));
 
+    }
+
+    @Test
+    public void test_checkStatus(){
+
+        BibliotecaApp app = new BibliotecaApp();
+        String[] librarian = new String[]{"000-0000", "js12345"};
+        String[] customer = new String[]{"000-0001", "annbrown"};
+
+        //assertEquals(true, app.checkStatus(librarian));
+        //assertEquals(true, app.checkStatus(customer));
     }
 
 

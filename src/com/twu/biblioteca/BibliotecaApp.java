@@ -1,10 +1,10 @@
 package com.twu.biblioteca;
 
+import java.io.*;
 import java.lang.reflect.Array;
 import java.util.*;
 import java.util.Scanner;
-import java.util.OptionalInt;
-import com.twu.biblioteca.BuildBiblioteca;
+import java.util.Arrays;
 
 
 public class BibliotecaApp {
@@ -12,8 +12,10 @@ public class BibliotecaApp {
     HashMap<Integer, ArrayList<String>> bookList = BuildBiblioteca.buildBookshelf();
     HashMap<Integer, ArrayList<String>> movieList = BuildBiblioteca.buildMovieshelf();
     HashMap<Integer, String> mainMenu = BuildBiblioteca.createMenu();
+    HashMap<Integer, String> helloPage = BuildBiblioteca.UniversalMenu();
     HashMap<Integer, ArrayList<String>> itemLib = BuildBiblioteca.buildItemLib();
     HashMap<Integer, ArrayList<String>> checkedItems = BuildBiblioteca.initializeList();
+
 
 
     public String getCustomer_name() {
@@ -84,18 +86,19 @@ public class BibliotecaApp {
         return output;
     }
 
-//    public HashMap<Integer, String> showBook() {
-//        System.out.println("------Book------");
-//
-//        String output = "";
-//
-//        for (Object keySet : bookPage.keySet()) {
-//            System.out.print(keySet + "   ");
-//            System.out.println(bookPage.get(keySet));
-//            output += keySet.toString() + bookPage.get(keySet);
-//        }
-//        return bookPage;
-//    }
+    public String showHome() {
+
+        System.out.println("------Home------");
+
+        String output = "";
+
+        for (Object keySet : helloPage.keySet()) {
+            System.out.print(keySet + "   ");
+            System.out.println(helloPage.get(keySet));
+            output += keySet.toString() + helloPage.get(keySet);
+        }
+        return output;
+    }
 
     public boolean optionValidation(HashMap optionsList, int option) {
         boolean validate = optionsList.containsKey(option);
@@ -197,39 +200,91 @@ public class BibliotecaApp {
     }
 
 
+    public static boolean checkStatus() {
+
+        System.out.println("Please login your account, id/password: ");
+        Scanner sc = new Scanner(System.in);
+        String[] loginInfos = sc.nextLine().split("/");
+        boolean result = false;
+        try {
+            FileInputStream fstream = new FileInputStream("./DataBase/UserLogin.txt");
+            DataInputStream in = new DataInputStream(fstream);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            String strLine;
+            while ((strLine = br.readLine()) != null) {
+                String[] user = strLine.split("/");
+                if (Arrays.equals(loginInfos,user)) {
+                    result = true;
+
+                }
+                continue;
+            }
+            in.close();
+        }catch (Exception e) {//Catch exception if any
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            return result;
+        }
+    }
+
     //continuous getting keyboard inputs. bookshelf->book->checkout bug.
     public void continousInput() {
         System.out.println("Please make a move with number:");
-        Scanner sc = new Scanner(System.in);
+        showHome();
+        boolean status = false;
+        Scanner scan = new Scanner(System.in);
         int input;
-        HashMap currentPage = mainMenu;
-        while (sc.hasNext()) {
+        //not login
+        HashMap currentPage = helloPage;
+        while (!status & scan.hasNext()) {
+            input = scan.nextInt();
+            if (input != 0 & optionValidation(currentPage, input)) {
+                if (input == 1) {
+                    input = 0;
+                }
+                else if (input == 2) {
+                    if (checkStatus() == true) {
+                        System.out.println("Login successfully!");
+                        showMenu();
+                        currentPage = mainMenu;
+                        status = true;
+                        break;
+                    } else {
+                        System.out.println("Wrong ID and/or password, please try again.");
+                        break;
+                    }
+                }
+            }
+            if (input == 0) {
+                System.out.println("------Quitting the system------");
+                System.out.println("------See you next time------");
+                break;
+            }
+        }
+        Scanner sc = new Scanner(System.in);
+        while (status & sc.hasNext()) {
             input = sc.nextInt();
             if (input != 0 & optionValidation(currentPage, input)) {
                 int opt = makeOption(currentPage, input); //transfer input
                 if (opt == 0) {
                     input = 0;
-                }
-                else if (opt == 1) {
+                } else if (opt == 1) {
                     showMenu();
                     currentPage = mainMenu;
                     continue;
-                }
-                else if(opt == 2){
+                } else if (opt == 2) {
                     listBooks();
                     currentPage = bookList;
                     continue;
-                }
-                else if(opt == 3){
+                } else if (opt == 3) {
                     listMovies();
                     currentPage = movieList;
                     continue;
-                }else if (opt == 4) {
+                } else if (opt == 4) {
                     listLib();
                     currentPage = itemLib;
                     continue;
-                }
-                else if(opt == 5){
+                } else if (opt == 5) {
                     listBorrowed();
                     currentPage = itemLib;
                     continue;
@@ -248,8 +303,7 @@ public class BibliotecaApp {
         BibliotecaApp app = new BibliotecaApp();
         String customer = app.getCustomer_name();
         app.printWelcome(customer);
-        app.showMenu();
+        //app.showMenu();
         app.continousInput();
     }
-
 }

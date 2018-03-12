@@ -47,6 +47,7 @@ public class BuildBiblioteca {
     }
 
     public static HashMap<Integer, String>  createMenu() {
+
         HashMap<Integer, String> menu = new HashMap<Integer, String>();
 
         menu.put(1, "Quit");
@@ -54,8 +55,19 @@ public class BuildBiblioteca {
         menu.put(3, "List Movies");
         menu.put(4, "Checkout Book");
         menu.put(5, "Return Book");
+        menu.put(6, "Account");
 
         return menu;
+    }
+
+    public static HashMap<Integer, String>  UniversalMenu() {
+
+        HashMap<Integer, String> u_menu = new HashMap<Integer, String>();
+
+        u_menu.put(1, "Quit");
+        u_menu.put(2, "Login");
+
+        return u_menu;
     }
 
 //    public static HashMap<Integer, String> createBookPage() {
