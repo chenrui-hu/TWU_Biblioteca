@@ -219,7 +219,6 @@ public class BibliotecaApp {
                 if (Arrays.equals(loginInfos,user)) {
                     User.add(user[0]);
                     result = true;
-
                 }
                 continue;
             }
